@@ -1,0 +1,74 @@
+{% extends "dashboard/empresa.html" %}
+{% block body %}
+
+<script>
+    window.onload = function () {
+        get_prestamos();
+    };</script>
+
+
+<section class="form container-fluid">
+
+    <button type="button" class="btns btn-primary" data-toggle="modal" data-target="#myModalPrestamo">
+        Agregar
+    </button>
+
+    <!-- Modal para ingresar nuevo préstamo -->
+<div class="modal fade" id="myModalPrestamo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar Préstamo</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form id="insertar_prestamo">
+                    <label for="fecha_atencion">Fecha de Atención:</label>
+                    <input type="date" class="form-control" id="fecha_atencion" name="fecha_atencion" required>
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                    <label for="plazo_meses">Plazo en Meses:</label>
+                    <input type="text" class="form-control" id="plazo_meses" name="plazo_meses" required>
+                    <label for="monto">Monto:</label>
+                    <input type="text" class="form-control" id="monto" name="monto" required>
+                    <label for="id_usuario_solicita">ID Usuario Solicita:</label>
+                    <input type="text" class="form-control" id="id_usuario_solicita" name="id_usuario_solicita" required>
+                    <label for="id_usuario_atiende">ID Usuario Atiende:</label>
+                    <input type="text" class="form-control" id="id_usuario_atiende" name="id_usuario_atiende" required>
+                </form>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="submitBtnPrestamo" onclick="add_prestamo()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <label for="buscar">Buscar:</label>
+    <input type="text" id="searchInput" placeholder="Buscar..." onclick="Search()">
+    <ul id="results"></ul>
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Usuario</th>
+                <th>Fecha atencion</th>
+                <th>Descripcion</th>
+                <th>Plazo meses</th>
+                <th>Pago mensual</th>
+                <th>Monto</th>
+            </tr>
+        </thead>
+        <tbody id="data_prestamos">
+            <!-- Aquí se insertarán los registros dinámicamente -->
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

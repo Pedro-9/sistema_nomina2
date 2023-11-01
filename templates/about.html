@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet" href="../static/css/about.css">
+</head>
+<body>
+
+    <main>
+        <section class="header">
+            <a href="{% if current_user.id_role == 1 %}/dashboard{% elif current_user.id_role == 2 %}/dashboard_empresa{% elif current_user.id_role == 3 %}/dashboard_empleado{% elif current_user.id_role == 4 %}/dashboard_rrhh{% elif current_user.id_role == 5 %}/dashboard_jefe{% endif %}" class="logo">
+                <h2>Dashboard</h2>
+            </a>
+            <div class="toggle">
+                <img src="../static/img/toggle.png" alt="toogle">
+            </div>
+        </section>
+        <section class="banner">
+            <img src="../static/img/bannner.webp" alt="banner" class="fitBg">
+            <div class="content">
+                <h2>Quiénes Somos</h2>
+                <p>Bienvenido a nuestro proyecto de sistema de nómina, donde transformamos la gestión financiera de tu empresa en una experiencia simple y eficiente. Con un enfoque en la innovación y la tecnología, estamos comprometidos a simplificar y agilizar la administración de nóminas para que puedas centrarte en lo que realmente importa: hacer crecer tu negocio.</p>
+                <h4>Automatización de Nóminas para un Futuro Empresarial Sólido</h4>
+                <a href="#mision" class="btn">ver más</a>
+            </div>
+        </section>
+        <section class="about" id="mision">
+            <div class="content contentMision">
+                <h2 class="titleText">Misión</h2>
+                <p class="text">Nuestra misión es proporcionar un sistema de nómina intuitivo y fácil de usar que simplifique la gestión financiera para empresas de todos los tamaños. Buscamos automatizar procesos, reducir el tiempo dedicado a tareas administrativas y mejorar la precisión de los cálculos de nómina, permitiendo así a nuestros clientes enfocarse en potenciar sus organizaciones y maximizar su éxito empresarial.</p>
+                <a href="#vision" class="btn">Ver visión</a>
+            </div>
+            <div class="ImgBx">
+                <img src="../static/img/mision.webp" alt="mision">
+            </div>
+        </section>
+        <section class="about">
+            <div class="content contentVision" id="vision">
+                <h2 class="titleText">Visión</h2>
+                <p class="text">Nuestra visión es ser líderes en la revolución de la gestión de nóminas, siendo reconocidos por nuestra innovación, confiabilidad y servicio excepcional al cliente. Aspiramos a establecer un estándar en la industria, brindando soluciones tecnológicas de vanguardia que transformen la manera en que se manejan las operaciones financieras en el ámbito empresarial, facilitando un futuro donde cada empresa pueda prosperar con eficiencia y tranquilidad.</p>
+                <a href="#equipo" class="btn">Ver equipo</a>
+            </div>
+            <div class="ImgBx">
+                <img src="../static/img/vision.webp" alt="mision">
+            </div>
+        
+        </section>
+
+    </main>
+    <section class="equipo" id="equipo">
+        <div class="content">
+            <h2 class="titleText">Nuestro Equipo</h2>
+            <p class="text">Conoce al talentoso equipo que está detrás de nuestro proyecto de sistema de nómina. Cada miembro contribuye con su experiencia y pasión para hacer de nuestra visión una realidad. Estamos dedicados a brindar soluciones excepcionales y tecnológicamente avanzadas para simplificar la gestión financiera empresarial.</p>
+        </div>
+
+        <div class="equipoList">
+            <div class="box">
+                <div class="imgBx">
+                    <img src="../static/img/analist1.webp" alt="analiata" class="fitBg" width="400">
+                </div>
+                <div class="content">
+                    <h3>
+                        Analista <br><span>Damaris</span>
+                    </h3>
+                </div>
+            </div>
+                <div class="box">
+                    <div class="imgBx">
+                        <img src="../static/img/analist2.webp" alt="analiata" class="fitBg" width="400">
+                    </div>
+                    <div class="content">
+                        <h3>
+                            Analista <br><span>Jose Maria</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="imgBx">
+                        <img src="../static/img/backend.webp" alt="analiata" class="fitBg">
+                    </div>
+                    <div class="content">
+                        <h3>
+                            Back-end <br><span>Pedro</span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="imgBx">
+                        <img src="../static/img/frontend.webp" alt="analiata" class="fitBg">
+                    </div>
+                    <div class="content">
+                        <h3>
+                            Front-end <br><span>Juan</span>
+                        </h3>
+                    </div>
+                </div>
+        </div>
+    </section>
+    <section class="banner3">
+        <img src="../static/img/banner3.jpg" alt="banner3" class="fitBg">
+    </section>
+
+    <footer class="footer">
+        <ul class="sci">
+            <li><a href="#"><img src="../static/img/facebook.png" alt="facebook"></a></li>
+            <li><a href="#"><img src="../static/img/instagram.png" alt="instagram"></a></li>
+            <li><a href="#"><img src="../static//img/twitter.png" alt="twitter"></a></li>
+        </ul>
+        <h4 class="copyright">
+            Copyright 2023
+            <a href="#">Name</a>
+            . All rights reserved.
+        </h4>
+    </footer>
+    
+</body>
+</html>

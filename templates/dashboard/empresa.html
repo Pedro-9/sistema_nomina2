@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+</head>
+
+<body>
+  <main class="main">
+    <header class="header">
+      <div class="logo">
+        <span><ion-icon name="person-outline"></ion-icon></span>
+        <h1>Dashboard</h1>
+      </div>
+      <!-- NAVIGATION  -->
+      <nav class="navegation">
+        <ul>
+          <li style="--i: #56ccf2; --j:#2f80ed;">
+            <a href="/dashboard_empresa">
+              <span class="icon"><ion-icon name="home-outline"></ion-icon>
+              </span>
+              <span class="title">Home</span>
+            </a>
+          </li>
+          <li style="--i: #56ccf2; --j:#2f80ed;">
+            <a href="/about">
+              <span class="icon"><ion-icon name="help-outline"></ion-icon>
+              </span>
+              <span class="title">About</span>
+            </a>
+          </li>
+          <li style="--i: #e46729; --j:#e91a1d;">
+            <a href="/logout">
+              <span class="icon"><ion-icon name="log-in-outline"></ion-icon>
+              </span>
+              <span class="title">cerrar cesion</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </header>
+
+    <div class="body">
+      <section class="panel ">
+        <ul>
+          <li><a href="/show_employee">Empleado</a></li>
+          <li><a href="/show_users">Usuarios</a></li>
+          <li><a href="/show_user_nominass">Horas</a></li>
+          <li><a href="/show_user_prestamos">Prestamos</a></li>
+          <li><a href="/show_user_anticipos">Anticipo</a></li>
+          <li><a href="/show_user_nomina">Nomina</a></li>
+          <li><a href="/show_departments">Departamentos</a></li>
+                  </ul>
+      </section>
+      
+      {% block body %}
+      {% endblock %}
+    </div>
+
+
+    <!-- footer -->
+    <!-- scripts -->
+    <footer class="footer text-light">
+      <div class="text-center">
+      <ul>
+        <li>
+          ¡Hola {{ current_user.username }}, Bienvenido!
+          </li>
+          <li>
+            <small>&copy; 2023 T Consulting S.A. Todos los derechos reservados.</small>
+        </li>
+      </ul>
+  </div>
+    </footer>
+
+  </main>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <script src="{{url_for('static', filename='js/script.js')}}"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+</body>
+
+</html>

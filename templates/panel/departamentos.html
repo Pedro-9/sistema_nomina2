@@ -1,0 +1,126 @@
+
+{% if current_user.id_role == 1 %}
+    {% extends "dashboard/administrador.html" %}
+{% elif current_user.id_role == 2 %}
+    {% extends "dashboard/empresa.html" %}
+{% endif %}
+
+{% block body %}
+
+{% if current_user.id_role == 1 %}
+    <script>
+        window.onload = function () {
+            $(document).ready(function() {
+                $('.basic-select-single').select2({});
+                get_select_usuarios('selectUsuario');
+            });
+        get_departamentos();
+        };
+    </script>
+{% elif current_user.id_role == 2 %}
+    <script>
+        window.onload = function () {
+            $(document).ready(function() {
+                $('.basic-select-single').select2({});
+                get_select_usuarios('selectUsuario');
+            });
+        get_departamentos();
+        };
+    </script>
+{% endif %}
+
+<section class="form container-fluid">
+    <button type="button" class="btns btn-primary" data-toggle="modal" data-target="#myModal">
+        Agregar
+    </button>
+
+    <!-- Modal para ingresar nueva empresa-->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar Departamento</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="isertar_departamento">
+                        <label for="departamento">Departamento:</label>
+                        <input type="text" class="form-control" id="departamento" name="departamento" required>
+
+                        <label for="usuario_solicita">Usuario:</label>
+                        <select id="selectUsuario" class="basic-select-single form-control">
+                            <option value="">...</option>
+                            <!-- <option value="WY">Wyoming</option> -->
+                        </select>
+
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn"
+                        onclick="add_usuario()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Modal para editar datos-->
+    <div class="modal fade" id="modal_editar_departamento">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar Departamento</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="actualizar_departamento">
+                        <label for="id">Id:</label>
+                        <input type="text" class="form-control" id="id_departamento" name="id_departamento" required readonly>
+                        <label for="departamento">Departamento:</label>
+                        <input type="text" class="form-control" id="editDepartamento" name="editDepartamento" required>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn"
+                        onclick="actualizar_departamento()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <label for="buscar">Buscar:</label>
+
+    <input type="text" id="searchInput" placeholder="Buscar..." onclick="Search()">
+    <ul id="results"></ul>
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>DEPARTAMENTO</th>
+                <th>ESTADO</th>
+                <th>USUARIO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="data_departamento">
+            <!-- Aquí se insertarán los registros dinámicamente -->
+        </tbody>
+    </table>
+    <button class="btns" id="regresarDepartamentos" onclick="regresarDepartamentos()">Regresar</button>
+    <button class="btns" id="siguientedeDartamentos" onclick="siguienteDepartamentos()">Mostrar Más</button>
+
+</section>
+
+{% endblock %}

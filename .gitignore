@@ -1,0 +1,22 @@
+# Carpeta del entorno virtual de Python
+venv/
+myenv/
+
+# Archivos de registro y caché
+*.pyc
+__pycache__/
+
+# Archivos de configuración local
+
+
+# Carpeta de dependencias
+lib/
+lib64/
+
+# Archivos de compilación
+*.egg-info/
+dist/
+build/
+
+# Archivos de registro
+*.log

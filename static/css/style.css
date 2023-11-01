@@ -1,0 +1,234 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  .main {
+    height: 100vh;
+    width: 100%;
+  }
+  .main .header {
+    width: 100%;
+    height: 15%;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .main .header .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    position: relative;
+    left: 15px;
+  }
+  .main .header .logo ion-icon {
+    color: #2f80ed;
+    font-size: 2.75em;
+    transition: 0.5s;
+  }
+  .main .header .logo h1 {
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+  }
+  .main .header .navegation {
+    position: relative;
+  }
+  .main .header .navegation ul {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+  .main .header .navegation ul li {
+    position: relative;
+    list-style: none;
+    margin-right: 50px;
+    background: #fff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    border-radius: 60px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.5s;
+  }
+  .main .header .navegation ul li a {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main .header .navegation ul li a ion-icon {
+    color: #777;
+    font-size: 1.75em;
+    transition: 0.5s;
+    transition-delay: 0.25s;
+  }
+  .main .header .navegation ul li a span {
+    position: absolute;
+  }
+  .main .header .navegation ul li a .title {
+    color: #fff;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: scale(0);
+    transition: 0.5s;
+    transition-delay: 0s;
+  }
+  .main .header .navegation ul li:hover {
+    width: 180px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0);
+  }
+  .main .header .navegation ul li:hover::before {
+    opacity: 1;
+  }
+  .main .header .navegation ul li:hover::after {
+    opacity: 0.5;
+  }
+  .main .header .navegation ul li:hover ion-icon {
+    transform: scale(0);
+    color: #fff;
+    transition-delay: 0.25s;
+  }
+  .main .header .navegation ul li:hover .title {
+    transform: scale(1);
+    transition-delay: 0.25s;
+  }
+  .main .header .navegation ul li::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 60px;
+    background: linear-gradient(45deg, var(--i), var(--j));
+    opacity: 0;
+    transition: 0.5s;
+  }
+  .main .header .navegation ul li::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    height: 100%;
+    border-radius: 60px;
+    background: linear-gradient(45deg, var(--i), var(--j));
+    transition: 0.5s;
+    filter: blur(15px);
+    z-index: -1;
+    opacity: 0;
+  }
+  .main .body {
+    width: 100%;
+    min-height: 80%;
+    display: flex;
+    /*text-align: center;*/
+  }
+  .main .body .panel {
+    width: 150px;
+    min-height: 75%;
+    border-radius: 2px;
+    background: linear-gradient(#2a70da, #204A8A);
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.3);
+  }
+  .main .body .panel ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .main .body .panel ul li {
+    list-style: none;
+    border-bottom: 1px solid #fff;
+    padding: 20px 10px;
+  }
+  .main .body .panel ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 0.8rem;
+    color: #fff;
+  }
+  .main .body .panel ul li a:hover {
+    color: black;
+  }
+  .main .body .panel ul li:hover {
+    background: #1e921a;
+  }
+  .main .body .form {
+    width: 100%;
+    flex: 2;
+  }
+  .main .footer {
+    background: linear-gradient(#2a70da, #204A8A);
+    width: 100%;
+    min-height: 5%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main .footer ul {
+    position: relative;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .main .footer ul li {
+    list-style: none;
+  }
+  .main .footer ul li ion-icon {
+    font-size: 2.5rem;
+    position: relative;
+    margin: 0 20px;
+    cursor: pointer;
+  }/*# sourceMappingURL=style.css.map */
+
+
+table {
+    border-collapse: collapse;
+    width: 95%;
+    margin: 20px auto;
+    font-size: 14px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 20px 0;
+}
+.pagination li {
+    margin: 0 5px;
+}
+
+
+.btns{
+    background-color: #0074D9; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 14px; 
+    cursor: pointer;
+    border-radius: 5px; 
+    margin: 5px;
+}
+
+#setearClave {
+  border-radius: 5px; 
+  right: 20px;
+  background-color: rgb(57, 86, 247);
+}

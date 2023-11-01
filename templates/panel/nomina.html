@@ -1,0 +1,45 @@
+{% extends "dashboard/empresa.html" %}
+{% block body %}
+
+ <script>
+    window.onload = function () {
+        get_nominas();
+    };
+</script> 
+
+<section class="form container-fluid">
+    <label for="buscar">Buscar:</label>
+    <input type="text" id="searchInput" placeholder="Buscar..." onclick="Search()">
+    <ul id="results"></ul>
+    <table id="miTabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>ROL</th>
+                <th>DIAS</th>
+                <th>SALARIO</th>
+                <th>HORAS EXTRAS</th>
+                <th>VALOR</th>
+                <th>COMISIONES</th>
+                <th>BONIFICACIONES</th>
+                <th>TOTAL DEVENGADO</th>
+                <th>IGGS</th>
+                <th>ISR</th>
+                <th>ANTICIPO</th>
+                <th>PRESTAMO</th>
+                <th>TOTAL DESCUENTO</th>
+                <th>TOTAL LIQUIDO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="data_nomina">
+            <!-- Aquí se insertarán los registros dinámicamente -->
+        </tbody>
+    </table>
+    <button class="btns" id="regresarNomina" onclick="regresarNomina()">Regresar</button>
+    <button class="btns" id="mostrarMasNomina" onclick="mostrarMasNomina()">Mostrar Más</button>
+</section>
+
+{% endblock %}
+

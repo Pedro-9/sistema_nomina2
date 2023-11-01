@@ -1,0 +1,201 @@
+{% if current_user.id_role == 1 %}
+    {% extends "dashboard/administrador.html" %}
+{% elif current_user.id_role == 2 %}
+    {% extends "dashboard/empresa.html" %}
+{% elif current_user.id_role == 3 %}
+    {% extends "dashboard/empleado.html" %}
+{% elif current_user.id_role == 4 %}
+    {% extends "dashboard/rrhh.html" %}
+{% elif current_user.id_role == 5 %}
+    {% extends "dashboard/jefe.html" %}
+{% endif %}
+
+{% block body %}
+
+<script>
+    window.onload = function () {
+        $(document).ready(function() {
+            $('.basic-select-single').select2({
+                //maximumSelectionLength: 1 // Permitir solo una selección
+            });
+            // Llamada a la función get_select_usuarios
+            get_select_usuarios('selectUsuario');
+        });
+        get_solicitud_permiso();
+        //get_usuarios_Empre();
+        //get_roles_select('selectRoles', null, 2);
+        //get_nombre_empresa('selectEmpresa');
+    };
+</script>
+
+<section class="form container-fluid">
+    <button type="button" class="btns btn-primary" data-toggle="modal" data-target="#myModal">
+        Agregar
+    </button>
+
+    <!-- Modal para ingresar nueva empresa-->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar Solicitud</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        <section class="form container p-3 my-3" >
+    
+    <form id="insertar_solicitud_permiso">
+        <!-- Días Solicitados -->
+        <div class="form-group">
+            <label for="dias">Días Solicitados:</label>
+            <input type="number" class="form-control" id="dias" name="dias" required min="0">
+        </div>
+
+        <!-- Inicio del Permiso -->
+        <div class="form-group">
+            <label for="inicio_permiso">Inicio del Permiso:</label>
+            <input type="date" class="form-control" id="inicio_permiso" name="inicio_permiso" required>
+        </div>
+
+        <!-- Fin del Permiso -->
+        <div class="form-group">
+            <label for="fin_permiso">Fin del Permiso:</label>
+            <input type="date" class="form-control" id="fin_permiso" name="fin_permiso" required>
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group">
+            <label for="fecha_solicitud">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+        </div>
+
+        <!-- Retorno Laboral -->
+        <div class="form-group">
+            <label for="retorno_laboral">Fecha de Retorno Laboral:</label>
+            <input type="date" class="form-control" id="retorno_laboral" name="retorno_laboral" readonly>
+        </div>
+
+        <!-- Usuario que Atiende - sesion actual-->
+        <div class="form-group">
+            <label for="usuario_atiende">Usuario que Atiende:</label>
+            <input type="text" class="form-control" id="usuario_atiende" name="usuario_atiende" readonly>
+        </div>
+
+        <!-- Usuario que Solicita -->
+        <div class="form-group">
+            <label for="usuario_solicita">Usuario que Solicita:</label>
+            <select id="selectUsuario" class="basic-select-single form-control">
+                <option value="">...</option>
+                <!-- <option value="WY">Wyoming</option> -->
+            </select>
+        </div>
+
+        
+        
+    </form>
+    <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="submitBtn"
+            onclick="add_solicitud_permiso()">Guardar</button>
+    </div>
+</section>
+</div>
+</div>
+</div>
+
+    <!-- Modal para editar solicitud-->
+    <div class="modal fade" id="modal_editar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar Solicitud</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        <section class="form container p-3 my-3" >
+    
+    <form id="editar_solicitud_permiso">
+        <!-- Días Solicitados -->
+        <div class="form-group">
+            <label for="dias">Días Solicitados:</label>
+            <input type="number" class="form-control" id="dias" name="dias" required min="0">
+        </div>
+
+        <!-- Inicio del Permiso -->
+        <div class="form-group">
+            <label for="inicio_permiso">Inicio del Permiso:</label>
+            <input type="date" class="form-control" id="inicio_permiso" name="inicio_permiso" required>
+        </div>
+
+        <!-- Fin del Permiso -->
+        <div class="form-group">
+            <label for="fin_permiso">Fin del Permiso:</label>
+            <input type="date" class="form-control" id="fin_permiso" name="fin_permiso" required>
+        </div>
+
+        <!-- Descripción -->
+        <div class="form-group">
+            <label for="fecha_solicitud">Descripción:</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+        </div>
+
+        <!-- Retorno Laboral -->
+        <div class="form-group">
+            <label for="retorno_laboral">Fecha de Retorno Laboral:</label>
+            <input type="date" class="form-control" id="retorno_laboral" name="retorno_laboral" readonly>
+        </div>
+
+        <!-- Usuario que Atiende - sesion actual-->
+        <div class="form-group">
+            <label for="usuario_atiende">Usuario que Atiende:</label>
+            <input type="text" class="form-control" id="usuario_atiende" name="usuario_atiende" value="{{ current_user.username }}" readonly>
+          </div>          
+
+        <!-- Usuario que Solicita -->
+        <div class="form-group">
+            <label for="usuario_solicita">Usuario que Solicita:</label>
+            <input type="text" class="form-control" id="usuario_solicita" name="usuario_solicita" required>
+        </div>
+    </form>
+    <!-- Modal footer -->
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="submitBtn"
+            onclick="add_solicitud_permiso()">Guardar</button>
+    </div>
+</section>
+</div>
+</div>
+</div>
+
+<label for="buscar">Buscar:</label>
+
+    <input type="text" id="searchInput" placeholder="Buscar..." onclick="Search()">
+    <ul id="results"></ul>
+    <table id="miTabla" class="miTabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>DIAS</th>
+                <th>FECHA INICIO</th>
+                <th>FECHA FIN</th>
+                <th>DESCRIPCION</th>
+                <th>RETORNO</th>
+                <th>ATENCIO</th>
+                <th>SOLICITO</th>
+                <th>FECHA REGISTRO</th>
+                <th>ESTADO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+            <!-- Aquí se insertarán los registros dinámicamente -->
+        </tbody>
+    </table>
+    <button class="btns" id="regresarSolicitud" onclick="regresarSolicitudPermiso()">Regresar</button>
+    <button class="btns" id="mostrarSolicitud" onclick="mostrarMasSolicitudesPermiso()">Mostrar Más</button>
+
+
+</section>
+{% endblock %}

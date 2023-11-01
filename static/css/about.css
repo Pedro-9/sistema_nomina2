@@ -1,0 +1,358 @@
+@import "https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap";
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #111;
+}
+
+main {
+  position: relative;
+}
+main .header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+main .header .logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+main .header .toggle img {
+  max-width: 40px;
+  cursor: pointer;
+}
+main .banner {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main .banner::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 100;
+  background: linear-gradient(to top, #111, transparent);
+}
+main .banner .fitBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.3;
+}
+main .banner .content {
+  position: relative;
+  z-index: 110;
+  max-width: 900px;
+  text-align: center;
+}
+main .banner .content h2 {
+  color: #fff;
+  font-size: 5em;
+}
+main .banner .content p {
+  color: #fff;
+  font-size: 1.2em;
+}
+main .banner .content h4 {
+  color: #fff;
+  font-size: 1.2em;
+}
+
+.equipo {
+  position: relative;
+  text-align: center;
+}
+.equipo .content {
+  text-align: center;
+}
+.equipo .equipoList {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.equipo .equipoList:hover .box {
+  opacity: 0.2;
+}
+.equipo .equipoList .box {
+  position: relative;
+  min-width: 350px;
+  height: 480px;
+  background: #191919;
+  transition: 0.5s;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.equipo .equipoList .box:hover {
+  opacity: 1;
+}
+.equipo .equipoList .box .imgBx {
+  max-width: 350px;
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+.equipo .equipoList .box .imgBx img {
+  width: 100%;
+  overflow: hidden;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.equipo .equipoList .box .content {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.equipo .equipoList .box .content h3 {
+  color: #fff;
+  font-weight: 500;
+  line-height: 1.2em;
+}
+.equipo .equipoList .box .content h3 span {
+  font-size: 0.8em;
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+.banner3 {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner3::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  z-index: 1000;
+  background: linear-gradient(to top, #111, transparent);
+}
+.banner3::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  z-index: 1000;
+  background: linear-gradient(to bottom, #111, transparent);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.footer .sci {
+  position: relative;
+  display: flex;
+}
+.footer .sci li {
+  list-style: none;
+}
+.footer .sci li a {
+  text-decoration: none;
+  margin: 0 20px;
+}
+.footer .sci li a img {
+  filter: invert(1);
+  max-width: 40px;
+}
+.footer .copyright {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 300;
+  color: #666;
+  text-align: center;
+}
+.footer .copyright a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a.btn {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+  background: #fff;
+  color: #333;
+  text-decoration: none;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+
+.titleText {
+  font-weight: 600;
+  color: #fff;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.text {
+  color: #fff;
+  font-size: 1em;
+}
+
+.ImgBx {
+  position: relative;
+  min-width: 50%;
+  width: 50%;
+  min-height: 500px;
+}
+.ImgBx img {
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.fitBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.8;
+}
+
+.about {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 5000;
+}
+.about .contentMision {
+  text-align: end;
+  padding-right: 40px;
+}
+.about .contentVision {
+  text-align: start;
+  padding-left: 40px;
+}
+.about .content {
+  min-width: 50%;
+  width: 50%;
+}
+.about:last-child {
+  flex-direction: row-reverse;
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 40px;
+  }
+  .banner .content h2 {
+    font-size: 2.5em;
+  }
+  .banner .content p {
+    font-size: 1em;
+  }
+  .equipoList .box {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    height: 400px;
+    min-width: initial;
+  }
+  .equipoList .box .imgBx {
+    height: 320px;
+  }
+  .footer .sci li a img {
+    filter: invert(1);
+    max-width: 30px;
+  }
+  .about {
+    flex-direction: column;
+  }
+  .about .contentMision {
+    text-align: center;
+    padding-right: 0px;
+  }
+  .about .contentVision {
+    text-align: center;
+    padding-left: 0px;
+  }
+  .about .content {
+    min-width: 100%;
+    width: 100%;
+    text-align: center;
+    padding-right: 0px;
+  }
+  .about .ImgBx {
+    min-width: 100%;
+    width: 100%;
+    text-align: center;
+    padding-right: 0px;
+  }
+  .about:last-child {
+    flex-direction: column;
+  }
+  .ImgBx {
+    min-height: 250px;
+  }
+  .titleText {
+    font-size: 1.5em;
+  }
+  a.btn {
+    margin-bottom: 30px;
+  }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #222;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #48DAEE;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}/*# sourceMappingURL=about.css.map */

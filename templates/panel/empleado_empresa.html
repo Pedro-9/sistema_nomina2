@@ -1,0 +1,152 @@
+{% extends "dashboard/empresa.html" %}
+{% block body %}
+
+<script>
+    window.onload = function () {
+        get_empleados2();
+        get_roles_select('selectRoles', null, 2);
+        get_nombre_empresa('selectEmpresa');
+        get_puestos('selectPuesto');
+    };</script>
+
+<section class="form container-fluid">
+    <button type="button" class="btns btn-primary" data-toggle="modal" data-target="#myModal" onclick="generarPassword('password')">
+        Agregar
+    </button>
+
+    <!-- Modal para ingresar nuevo usuario-->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Agregar Usuario</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="isertar_empleado">
+                        <label>Nombres:</label>
+                        <input type="text" class="form-control" id="nombres" name="nombres" required>
+                        <label>Apellidos:</label>
+                        <input type="text" class="form-control" id="apellidos" name="apellidos" required>
+                        <label>DPI:</label>
+                        <input type="number" class="form-control" id="dpi" name="dpi" required>
+                        <label>NIT:</label>
+                        <input type="number" class="form-control" id="nit" name="nit" required>
+                        <label>Dirección:</label>
+                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                        <label>Celular:</label>
+                        <input type="number" class="form-control" id="celular" name="celular" required>
+                        <label>Correo:</label>
+                        <input type="email" class="form-control" id="correo" name="correo" required>
+                        <!-- <label>Genero:</label>
+                        <select id="genero" class="form-control" aria-label="--genero--">
+                            <option value="">--seleccionar genero--</option>
+                            <option value="">Masculino</option>
+                            <option value="">Femenino</option>
+                        </select> -->
+                        <label for="rol">Rol:</label>
+                        <select id="selectRoles" class="form-control" aria-label="Selecciona un rol">
+                            <option value="">Cargando roles...</option>
+                        </select>
+                        <label>Empresa:</label>
+                        <select id="selectEmpresa" class="form-control" aria-label="Seleccionar empresa">
+                            <option value="">Cargando empresas...</option>
+                        </select>
+                        <label>Puesto:</label>
+                        <select id="selectPuesto" class="form-control" aria-label="Seleccionar puesto">
+                            <option value="">Cargando puestos...</option>
+                        </select>
+                        <label>Usuario Recomendado:</label>
+                        <input type="text" class="form-control" id="usuario" name="usuario" required>
+                        <label>Clave:</label>
+                        <input type="text" class="form-control" id="password" name="password" required readonly>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn"
+                        onclick="add_empleado()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Modal para editar datos-->
+    <div class="modal fade" id="modal_editar">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Editar Usuario</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <form id="actualizar_usuario">
+                        <label for="id">Id:</label>
+                        <input type="text" class="form-control" id="id_usuario" name="id_usuario" required readonly>
+                        <label for="usuario">Usuario:</label>
+                        <input type="text" class="form-control" id="editUsuario" name="editUsuario" required>
+                        <label for="password">Clave:</label>
+                        <button type="button" class="btn-primary" id="setearClave" 
+                            onclick="generarPassword('editPassword')">setear</button>
+                        <input type="text" class="form-control" id="editPassword" name="editPassword" required readonly>
+                        <label for="rol">Rol:</label>
+                        <select id="selectEditRoles" class="form-control" aria-label="Selecciona un rol">
+                            <option value="">Cargando roles...</option>
+                        </select>
+                        <label for="empresa">Empresa:</label>
+                        <select id="selectEditEmpresa" class="form-control" aria-label="Seleccionar empresa">
+                            <option value="">Cargando empresas...</option>
+                        </select>
+                    </form>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" id="submitBtn"
+                        onclick="actualizar_empleado()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <label for="buscar">Buscar:</label>
+
+    <input type="text" id="searchInput" placeholder="Buscar..." onclick="Search()">
+    <ul id="results"></ul>
+    <table id="miTabla" class="miTabla">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>DPI</th>
+                <th>NIT</th>
+                <th>TELEFONO</th>
+                <th>CORREO</th>
+                <th>ESTADO</th>
+                <th>EMPRESA</th>
+                <th>PUESTO</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="data">
+            <!-- Aquí se insertarán los registros dinámicamente -->
+        </tbody>
+    </table>
+    <button class="btns" id="regresarEmpleado" onclick="regresarEmpleados2()">Regresar</button>
+    <button class="btns" id="mostrarMasEmpleado" onclick="mostrarEmpleados2()">Mostrar Más</button>
+
+</section>
+
+{% endblock %}
