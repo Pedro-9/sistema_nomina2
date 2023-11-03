@@ -1,16 +1,6 @@
-{% if current_user.id_role == 1 %}
-    {% extends "dashboard/administrador.html" %}
-{% elif current_user.id_role == 2 %}
-    {% extends "dashboard/empresa.html" %}
-<!-- {% elif current_user.id_role == 3 %}
-    {% extends "dashboard/jefe.html" %} -->
-{% elif current_user.id_role == 4 %}
-    {% extends "dashboard/rrhh.html" %}
-{% endif %}
-
+{% extends "dashboard/admin.html" %}
 {% block body %}
 
-{% if current_user.id_role == 1 %}
 <script>
     window.onload = function () {
         get_empleados();
@@ -18,18 +8,6 @@
         get_select_empresas('selectEmpresa');
         get_puestos('selectPuesto');
     };</script>
-{% elif current_user.id_role == 2 or current_user.id_role == 4 %}
-<script>
-    window.onload = function () {
-        get_empleados2();
-        get_roles_select('selectRoles', null, 2);
-        get_nombre_empresa('selectEmpresa');
-        get_puestos('selectPuesto');
-    };</script>
-{% endif %}
-
-
-
 
 <section class="form container-fluid">
     <button type="button" class="btns btn-primary" data-toggle="modal" data-target="#myModal" onclick="generarPassword('password')">
@@ -166,14 +144,8 @@
             <!-- Aquí se insertarán los registros dinámicamente -->
         </tbody>
     </table>
-    {% if current_user.id_role == 1 %}
     <button class="btns" id="regresarEmpleado" onclick="regresarEmpleados()">Regresar</button>
     <button class="btns" id="mostrarMasEmpleado" onclick="mostrarMasEmpleados()">Mostrar Más</button>
-
-    {% elif current_user.id_role == 2 or current_user.id_role == 4 %}
-    <button class="btns" id="regresarEmpleado" onclick="regresarEmpleados2()">Regresar</button>
-    <button class="btns" id="mostrarMasEmpleado" onclick="mostrarEmpleados2()">Mostrar Más</button>
-    {% endif %}
 
 </section>
 

@@ -10,7 +10,7 @@
 
     <main>
         <section class="header">
-            <a href="{% if current_user.id_role == 1 %}/dashboard{% elif current_user.id_role == 2 %}/dashboard_empresa{% elif current_user.id_role == 3 %}/dashboard_empleado{% elif current_user.id_role == 4 %}/dashboard_rrhh{% elif current_user.id_role == 5 %}/dashboard_jefe{% endif %}" class="logo">
+            <a href="/dashboard" class="logo">
                 <h2>Dashboard</h2>
             </a>
             <div class="toggle">

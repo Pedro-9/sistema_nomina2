@@ -7,9 +7,12 @@
   <title>Dashboard</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+
 </head>
 
 <body>
+
+
   <main class="main">
     <header class="header">
       <div class="logo">
@@ -27,7 +30,7 @@
             </a>
           </li>
           <li style="--i: #56ccf2; --j:#2f80ed;">
-            <a href="/about">
+            <a href="#">
               <span class="icon"><ion-icon name="help-outline"></ion-icon>
               </span>
               <span class="title">About</span>
@@ -48,14 +51,10 @@
     <div class="body">
       <section class="panel ">
         <ul>
-          <li><a href="/show_employee">Empleado</a></li>
-          <li><a href="/show_users">Usuarios</a></li>
-          <li><a href="/show_user_nominass">Horas</a></li>
-          <li><a href="/show_user_prestamos">Prestamos</a></li>
-          <li><a href="/show_user_anticipos">Anticipo</a></li>
-          <li><a href="/show_user_nomina">Nomina</a></li>
-          <li><a href="/show_departments">Departamentos</a></li>
-                  </ul>
+          <li><a href="/show_employee_conpanie">Empleado</a></li>
+          <li><a href="/show_user_companie">Usuarios</a></li>
+          
+        </ul>
       </section>
       
       {% block body %}
@@ -65,19 +64,14 @@
 
     <!-- footer -->
     <!-- scripts -->
-    <footer class="footer text-light">
-      <div class="text-center">
+    <footer class="footer">
       <ul>
         <li>
-          ¡Hola {{ current_user.username }}, Bienvenido!
-          </li>
-          <li>
-            <small>&copy; 2023 T Consulting S.A. Todos los derechos reservados.</small>
+          
         </li>
       </ul>
-  </div>
-    </footer>
 
+    </footer>
   </main>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -88,10 +82,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
-
 </body>
 
 </html>

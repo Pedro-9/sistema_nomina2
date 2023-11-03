@@ -1,16 +1,3 @@
-{% if current_user.id_role %}
-    {% if current_user.id_role == 1 %}
-        <script>window.location.href = "/dashboard";</script>
-    {% elif current_user.id_role == 2 %}
-        <script>window.location.href = "/dashboard_empresa";</script>
-    {% elif current_user.id_role == 3 %}
-        <script>window.location.href = "/dashboard_empleado";</script>
-    {% elif current_user.id_role == 4 %}
-        <script>window.location.href = "/dashboard_rrhh";</script>
-    {% elif current_user.id_role == 5 %}
-        <script>window.location.href = "/dashboard_jefe";</script>
-    {% endif %}
-{% else %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -59,4 +46,3 @@
 </body>
 
 </html>
-{% endif %}

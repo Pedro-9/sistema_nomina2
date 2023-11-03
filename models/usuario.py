@@ -8,11 +8,10 @@ from flask_login import UserMixin
 
 class User(UserMixin):
 
-    def __init__(self, id, username, password, id_role) -> None:
+    def __init__(self, id, username, password) -> None:
         self.id = id
         self.username = username
         self.password = password
-        self.id_role = id_role
 
     @classmethod
     def check_password(self, hashed_password, password):
@@ -22,7 +21,7 @@ class User(UserMixin):
 class Usuario:
     def __init__(self):
         self.id = 0
-        self.id_role = 0
+        self.id_rol = 0
         self.ultimo_id = ''
 
     def getFecha(self):
@@ -54,7 +53,7 @@ class Usuario:
             Logger.add_to_log("error", traceback.format_exc())
             return None
 
-    def insert_usuario(self, usuario, password, id_role, id_empresa):
+    def insert_usuario(self, usuario, password, id_rol, id_empresa):
         try:
             password_hash = generate_password_hash(password)
             if self.existe_usuario(usuario) == None:
@@ -64,7 +63,7 @@ class Usuario:
                                 usuario, password, f_registro,
                                 f_modificacion, estado, id_rol, id_empresa) 
                                 VALUES (%s, %s, %s, %s, %s, %s, %s)''',
-                                   (usuario, password_hash, self.getFecha(), self.getFecha(), '0', id_role, id_empresa))
+                                   (usuario, password_hash, self.getFecha(), self.getFecha(), '0', id_rol, id_empresa))
                 mysql.connection.commit()
                 self.ultimo_id = self.get_ultimo_id()
                 return True
@@ -98,7 +97,7 @@ class Usuario:
             SELECT * FROM usuarios WHERE id_usuario = %s
             AND estado = %s'''
         params = (id_usuario, '0')
-        return self.execute_query(query, params=params), self.id_role
+        return self.execute_query(query, params=params), self.id_rol
 
     def existe_usuario(self, _usuario):
         query = '''
@@ -119,9 +118,9 @@ class Usuario:
         params = (_usuario, '0', '0', id_empresa)
         row = self.execute_query(query, params=params)
         if row != None:
-            self.id_role = row['id_rol']
+            self.id_rol = row['id_rol']
             user = User(row['id_usuario'], row['usuario'],
-                        User.check_password(row['password'], password), None)
+                        User.check_password(row['password'], password))
             return user, row['id_rol']
         else:
             return None, None
@@ -134,19 +133,19 @@ class Usuario:
     def get_by_id(self, id):
         try:
             cursor = mysql.connection.cursor()
-            sql = "SELECT id_usuario, usuario, id_rol FROM usuarios WHERE id_usuario = {}".format(
+            sql = "SELECT id_usuario, usuario FROM usuarios WHERE id_usuario = {}".format(
                 id)
             cursor.execute(sql)
             row = cursor.fetchone()
             if row != None:
-                return User(row['id_usuario'], row['usuario'], None, row['id_rol'])
+                return User(row['id_usuario'], row['usuario'], None)
             else:
                 return None
         except Exception as err:
             Logger.add_to_log("error", str(err))
             Logger.add_to_log("error", traceback.format_exc())
 
-    def update_usuario(self, usuario, password, id_role, id_empresa, id_usuario):
+    def update_usuario(self, usuario, password, id_rol, id_empresa, id_usuario):
         try:
             if len(password) < 100:
                 password_hash = generate_password_hash(password)
@@ -158,7 +157,7 @@ class Usuario:
                                 SET usuario = %s, password = %s, f_modificacion = %s, 
                                 id_rol = %s, id_empresa = %s
                                 WHERE id_usuario = %s ''',
-                               (usuario, password_hash, self.getFecha(), id_role, id_empresa, id_usuario))
+                               (usuario, password_hash, self.getFecha(), id_rol, id_empresa, id_usuario))
             mysql.connection.commit()
             return True
         except Exception as err:
@@ -206,7 +205,7 @@ class Usuario:
                 WHERE us.estado = %s and rol.id_rol = %s and em.id_empresa = %s
                 order by us.id_usuario desc LIMIT 1
                 '''
-        params = ('0', self.id_role, self.id)
+        params = ('0', self.id_rol, self.id)
         return self.execute_query(query, params=params)
     
     def get_empleados_empresa(self):
@@ -221,41 +220,3 @@ class Usuario:
         where em.estado = %s AND emp.id_empresa = %s order by id_empleado desc'''
         params = ('0',self.id)
         return self.execute_query(query, params=params, fetchall=True)
-    
-
-    def get_nomina_data(self):
-        query = '''
-            SELECT
-			e.id_empleado,
-            CONCAT(e.nombre, ' ', e.apellido) as nombre,
-            r.nombre_rol,
-            n.dias,
-            pues.sueldo,
-            n.horas_extra,
-            f_valorHora(pues.sueldo, n.horas_extra) as valor,
-            n.comisiones,
-            n.bonificaciones,
-            (pues.sueldo + f_valorHora( pues.sueldo, n.horas_extra) + n.comisiones) AS TOTAL_DEVENGADO,
-            f_igss(pues.sueldo, n.horas_extra, n.comisiones, b.descuento_igss) AS IGGS,
-            f_ISR(pues.sueldo, n.horas_extra, n.comisiones, b.descuento_igss, b.descuento_isr, n.bonificaciones) AS ISR,
-            an.monto as anticipo,
-            p.monto as descuento_prestamo,
-            (f_igss( pues.sueldo, n.horas_extra, n.comisiones, b.descuento_igss) + 
-             f_ISR( pues.sueldo, n.horas_extra, n.comisiones, b.descuento_igss, b.descuento_isr, n.bonificaciones) + 
-             an.monto + p.monto) AS TotalDescuento,
-            (( pues.sueldo + f_valorHora( pues.sueldo, n.horas_extra) + n.comisiones) - 
-             (f_igss( pues.sueldo, n.horas_extra, n.comisiones, b.descuento_igss) + 
-              f_ISR( pues.sueldo, n.horas_extra, n.comisiones, b.descuento_igss, b.descuento_isr, n.bonificaciones) + 
-              an.monto + p.monto)) AS TOTAL_LIQUIDO
-            FROM empleados e
-            INNER JOIN usuarios u ON e.id_usuario = u.id_usuario
-            INNER JOIN roles r ON u.id_rol = r.id_rol
-            INNER JOIN nominas n ON e.id_empleado = n.id_empleado
-            INNER JOIN bauchers b ON n.id_nomina = b.id_nomina
-            INNER JOIN PRESTAMOS p ON u.id_usuario = p.id_usuario_solicita
-            INNER JOIN anticipos an ON u.id_usuario = an.id_usuario
-            INNER JOIN puestos pues ON e.id_empleado = pues.id
-            WHERE e.id_empresa = %s ;
-        '''
-        params = (self.id)
-        return self.execute_query(query, params = params, fetchall=True)

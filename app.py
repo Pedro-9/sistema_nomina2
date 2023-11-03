@@ -7,10 +7,6 @@ from routes.routes_roles import roles
 from routes.routes_empresa import empresas
 from routes.routes_empleado import empleados
 from routes.routes_puesto import puestos
-from routes.routes_solicitudes import solicitudes
-from routes.routes_departamentos import departamentos
-#from routes.routes_notificaciones import notificaciones
-
 
 
 login_manager_app = LoginManager(app)
@@ -26,9 +22,6 @@ app.register_blueprint(roles)
 app.register_blueprint(empresas)
 app.register_blueprint(empleados)
 app.register_blueprint(puestos)
-app.register_blueprint(solicitudes)
-app.register_blueprint(departamentos)
-#app.register_blueprint(notificaciones)
 
 
 def status_401(error):
